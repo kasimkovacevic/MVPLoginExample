@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MVPLoginExample</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="serrver_error">Server error occurred, please try later</string>
+    <string name="login_failed">Incorrect password or email entered. Please try again.</string>
+
+
+</resources>
