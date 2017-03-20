@@ -4,7 +4,7 @@ import info.kasimkovacevic.mvploginexample.models.Login;
 import info.kasimkovacevic.mvploginexample.models.User;
 
 /**
- * @author Kasim Kovacevic on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
 public interface LoginContract {
 
@@ -27,13 +27,13 @@ public interface LoginContract {
         void onDestroy();
     }
 
-    interface Interceptor {
-        void login(Login login);
+    interface Interactor {
+        void login(Login login, LoginContract.InteractorCallback callback);
 
         void onDestroy();
     }
 
-    interface InterceptorCallback {
+    interface InteractorCallback {
         void onLoginSuccess(User user);
 
         void onLoginFailed();

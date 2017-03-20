@@ -8,7 +8,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
 public class RestClientRouter {
 

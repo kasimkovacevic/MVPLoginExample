@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
 public class User implements Parcelable {
 

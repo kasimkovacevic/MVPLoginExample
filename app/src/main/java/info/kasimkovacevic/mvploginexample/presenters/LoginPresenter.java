@@ -1,46 +1,45 @@
 package info.kasimkovacevic.mvploginexample.presenters;
 
-import android.text.TextUtils;
-
 import info.kasimkovacevic.mvploginexample.contracts.LoginContract;
-import info.kasimkovacevic.mvploginexample.interceptors.LoginInterceptorImpl;
 import info.kasimkovacevic.mvploginexample.models.Login;
 import info.kasimkovacevic.mvploginexample.models.User;
 import info.kasimkovacevic.mvploginexample.utils.LoginUtil;
 
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
-public class LoginPresenterImpl implements LoginContract.Presenter, LoginContract.InterceptorCallback {
+public class LoginPresenter implements LoginContract.Presenter, LoginContract.InteractorCallback {
 
     private LoginContract.View mLoginView;
-    private LoginContract.Interceptor mLoginInterceptor;
+    private LoginContract.Interactor mLoginInteractor;
 
 
-    public LoginPresenterImpl(LoginContract.View view) {
+    public LoginPresenter(LoginContract.View view, LoginContract.Interactor interactor) {
         this.mLoginView = view;
-        this.mLoginInterceptor = new LoginInterceptorImpl(this);
+        this.mLoginInteractor = interactor;
     }
+
 
     @Override
     public void login(Login login) {
-        if (TextUtils.isEmpty(login.getEmail()) || !LoginUtil.isValidEmail(login.getEmail())) {
+        if (login.getEmail() == null || !LoginUtil.isValidEmail(login.getEmail())) {
             mLoginView.onInvalidEmail();
-        } else if (TextUtils.isEmpty(login.getPassword()) || login.getPassword().length() < 4) {
+        } else if (login.getPassword() == null || login.getPassword().length() < 4) {
             mLoginView.onInvalidPassword();
         } else {
-            mLoginInterceptor.login(login);
+            mLoginInteractor.login(login, this);
         }
     }
 
     @Override
     public void onDestroy() {
-        mLoginInterceptor.onDestroy();
+        mLoginInteractor.onDestroy();
     }
 
     @Override
     public void onLoginSuccess(User user) {
+        //TODO if need to save in session
         mLoginView.onLoginSuccess(user);
     }
 
