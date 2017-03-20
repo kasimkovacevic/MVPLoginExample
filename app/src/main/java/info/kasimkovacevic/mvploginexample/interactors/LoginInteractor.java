@@ -1,6 +1,7 @@
 package info.kasimkovacevic.mvploginexample.interactors;
 
 import info.kasimkovacevic.mvploginexample.contracts.LoginContract;
+import info.kasimkovacevic.mvploginexample.data.RestApi;
 import info.kasimkovacevic.mvploginexample.data.RestClientRouter;
 import info.kasimkovacevic.mvploginexample.models.Login;
 import info.kasimkovacevic.mvploginexample.models.User;
@@ -14,13 +15,16 @@ import retrofit2.Response;
 public class LoginInteractor implements LoginContract.Interactor {
 
     private Call<User> mCall;
+    private RestApi mRestApi;
 
-    public LoginInteractor() {}
+    public LoginInteractor(RestApi restApi) {
+        this.mRestApi = restApi;
+    }
 
 
     @Override
     public void login(Login login, final LoginContract.InteractorCallback callback) {
-        mCall = RestClientRouter.get().login(login);
+        mCall = mRestApi.login(login);
         mCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
