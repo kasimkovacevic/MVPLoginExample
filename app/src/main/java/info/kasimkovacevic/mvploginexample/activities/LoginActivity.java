@@ -1,5 +1,6 @@
 package info.kasimkovacevic.mvploginexample.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -91,7 +92,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onLoginSuccess(User user) {
-        //TODO open new screen
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.USER_BUNDLE_KEY, user);
+        startActivity(intent);
+        finish();
     }
 
     private void resetErrorFields() {

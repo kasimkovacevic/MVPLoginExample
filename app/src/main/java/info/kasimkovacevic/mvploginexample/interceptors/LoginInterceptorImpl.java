@@ -36,6 +36,7 @@ public class LoginInterceptorImpl implements LoginContract.Interceptor {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
                 if (!mCall.isCanceled()) {
                     mCallback.onServerError();
                 }
