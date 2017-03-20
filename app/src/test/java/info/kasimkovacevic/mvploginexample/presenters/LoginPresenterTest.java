@@ -1,11 +1,13 @@
-package info.kasimkovacevic.mvploginexample;
+package info.kasimkovacevic.mvploginexample.presenters;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.verification.VerificationMode;
 
@@ -30,7 +32,15 @@ public class LoginPresenterTest {
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         presenter = new LoginPresenter(view, interactor);
+    }
+
+    @After
+    public void clear() {
+        presenter = null;
+        Mockito.clearInvocations(view);
+        Mockito.clearInvocations(interactor);
     }
 
     @Test

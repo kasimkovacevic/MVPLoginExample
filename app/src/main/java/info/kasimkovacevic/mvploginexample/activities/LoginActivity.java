@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import info.kasimkovacevic.mvploginexample.R;
 import info.kasimkovacevic.mvploginexample.contracts.LoginContract;
+import info.kasimkovacevic.mvploginexample.data.RestClientRouter;
 import info.kasimkovacevic.mvploginexample.interactors.LoginInteractor;
 import info.kasimkovacevic.mvploginexample.models.Login;
 import info.kasimkovacevic.mvploginexample.models.User;
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mUnbind = ButterKnife.bind(this);
-        mLoginPresenter = new LoginPresenter(this, new LoginInteractor());
+        mLoginPresenter = new LoginPresenter(this, new LoginInteractor(RestClientRouter.get()));
     }
 
     @OnClick(R.id.btn_sign_in)

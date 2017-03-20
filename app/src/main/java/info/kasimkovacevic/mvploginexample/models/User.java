@@ -17,13 +17,13 @@ public class User implements Parcelable {
     @JsonProperty("age")
     private int age;
     @JsonProperty("first_name")
-    String firstName;
+    private String firstName;
     @JsonProperty("last_name")
-    String lastName;
+    private String lastName;
     @JsonProperty("address")
-    String address;
+    private String address;
     @JsonProperty("city")
-    String city;
+    private String city;
 
     public User() {
     }
