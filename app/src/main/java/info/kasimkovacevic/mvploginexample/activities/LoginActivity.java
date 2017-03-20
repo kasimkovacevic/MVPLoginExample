@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,13 +15,13 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import info.kasimkovacevic.mvploginexample.R;
 import info.kasimkovacevic.mvploginexample.contracts.LoginContract;
+import info.kasimkovacevic.mvploginexample.interactors.LoginInteractor;
 import info.kasimkovacevic.mvploginexample.models.Login;
 import info.kasimkovacevic.mvploginexample.models.User;
-import info.kasimkovacevic.mvploginexample.presenters.LoginPresenterImpl;
-import info.kasimkovacevic.mvploginexample.utils.LoginUtil;
+import info.kasimkovacevic.mvploginexample.presenters.LoginPresenter;
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -46,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mUnbind = ButterKnife.bind(this);
-        mLoginPresenter = new LoginPresenterImpl(this);
+        mLoginPresenter = new LoginPresenter(this, new LoginInteractor());
     }
 
     @OnClick(R.id.btn_sign_in)

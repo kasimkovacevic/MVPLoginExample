@@ -1,4 +1,4 @@
-package info.kasimkovacevic.mvploginexample.interceptors;
+package info.kasimkovacevic.mvploginexample.interactors;
 
 import info.kasimkovacevic.mvploginexample.contracts.LoginContract;
 import info.kasimkovacevic.mvploginexample.data.RestClientRouter;
@@ -9,36 +9,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
-public class LoginInterceptorImpl implements LoginContract.Interceptor {
+public class LoginInteractor implements LoginContract.Interactor {
 
-    private LoginContract.InterceptorCallback mCallback;
     private Call<User> mCall;
 
-    public LoginInterceptorImpl(LoginContract.InterceptorCallback callback) {
-        this.mCallback = callback;
-    }
+    public LoginInteractor() {}
 
 
     @Override
-    public void login(Login login) {
+    public void login(Login login, final LoginContract.InteractorCallback callback) {
         mCall = RestClientRouter.get().login(login);
         mCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    mCallback.onLoginSuccess(response.body());
+                    callback.onLoginSuccess(response.body());
                 } else {
-                    mCallback.onLoginFailed();
+                    callback.onLoginFailed();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                t.printStackTrace();
                 if (!mCall.isCanceled()) {
-                    mCallback.onServerError();
+                    callback.onServerError();
                 }
             }
         });
@@ -46,6 +42,7 @@ public class LoginInterceptorImpl implements LoginContract.Interceptor {
 
     @Override
     public void onDestroy() {
-        mCall.cancel();
+        if (mCall != null)
+            mCall.cancel();
     }
 }

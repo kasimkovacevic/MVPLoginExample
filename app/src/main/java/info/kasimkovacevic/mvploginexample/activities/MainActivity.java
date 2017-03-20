@@ -8,7 +8,7 @@ import info.kasimkovacevic.mvploginexample.R;
 import info.kasimkovacevic.mvploginexample.models.User;
 
 /**
- * @author Kasim Kovacevic <kasim@atlantbh.com> on 3/16/17.
+ * @author Kasim Kovacevic <kasim.kovacevic@gmail.com>
  */
 public class MainActivity extends AppCompatActivity {
 
